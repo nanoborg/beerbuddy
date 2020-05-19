@@ -22,11 +22,11 @@ app.get("/beers/:id", (req, res) => {
     //res.send("Beer info here");
     console.log(req.params.id)
     var all_records = null;
-    db.query("SELECT * from beertype;", (err, dbres) => {
-        all_records = dbres.rows;
-        //res.json(dbres.rows);
-        //console.log("Hello");
-        res.render("show", { beerTypes: all_records });
+    db.query("select avg(rating), beertype.beertype, beerbrand.beerbrand from rating, pub,beertype,beerbrand where rating.pub_id = pub.id and pub.id=2 and beertype.id = rating.beertype and beerbrand.id = rating.beerbrand_id group by beertype.beertype,beerbrand.beerbrand;", (err, dbres) => {
+    all_records = dbres.rows;
+    //res.json(dbres.rows);
+    //console.log("Hello");
+    res.render("show", { beerTypes: all_records });
     });
 });
 

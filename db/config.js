@@ -3,7 +3,7 @@ const pg = require("pg");
 const pool = new pg.Pool({
     database: "beerbuddy",
     // for Shallesh....
-    // password: ''
+    // password: 'beer'
 });
 
 module.exports = {
