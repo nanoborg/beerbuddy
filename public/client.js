@@ -1,3 +1,14 @@
+let pin = null
+
+const handlePinClick = (e) => {
+    // console.log(e.target)
+    let path = `/beers/${e.target.metadata.id}`
+    axios.get(path).then(res => {
+        console.log(res)
+        document.body.innerHTML = res.data
+    })
+}
+
 function getMap() {
     var map = new Microsoft.Maps.Map('#map', {
         center: new Microsoft.Maps.Location(-37.8136, 
@@ -6,26 +17,34 @@ function getMap() {
     })
     var center = map.getCenter()
 
-    const url = 'http://localhost:8080/api'
+    const path = '/pubs'
 
-    axios.get(url).then(res => {
+    axios.get(path).then(res => {
         // console.log(res.data)
-
+        
         let pubs = res.data
-
+        
         pubs.forEach(pub => {
+            console.log(pub)
             var location = {latitude: pub.lat, longitude: pub.long}
 
             //Create custom Pushpin
-        var pin = new Microsoft.Maps.Pushpin(location, {
+            pin = new Microsoft.Maps.Pushpin(location, {
             title: pub.pubname, 
-            icon: 'beer.png'
+            icon: pub.is_pub_ratedb? 'beer.png':'pub-icon.png',
+            anchor: new Microsoft.Maps.Point(12,36)
         });
-    
+
+        pin.metadata = {
+            id: pub.id
+        }
+
+        Microsoft.Maps.Events.addHandler(pin, 'click', handlePinClick)
+        
         //Add the pushpin to the map
         map.entities.push(pin)
             
-        })
+        });
         
     })
 

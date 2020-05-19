@@ -14,7 +14,7 @@ CREATE TABLE pub (
 
 insert into pub (pubname, LAT, Long) values ('Players On Lygon', -37.80246412, 144.9670937);
 
-insert into pub (pubname, LAT, Long) values ('Bar Centrale', -37.80344128, 144.9667701);
+insert into pub (pubname, LAT, Long, is_pub_ratedB) values ('Bar Centrale', -37.80344128, 144.9667701, true);
 
 insert into pub (pubname, LAT, Long) values ('Percys Bar & Bistro', -37.79694543, 144.9678124);
 
