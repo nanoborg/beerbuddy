@@ -10,8 +10,12 @@ app.set("view engine", "ejs");
 
 app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-    res.send("Hello there");
+app.get("/api", (req, res) => {
+    db.query('select * from pub;', (err, dbRes) => {
+        
+        res.json(dbRes.rows)
+        
+    })
 });
 
 app.get("/beers", (req, res) => {
