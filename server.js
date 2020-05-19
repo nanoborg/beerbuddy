@@ -10,7 +10,7 @@ app.set("view engine", "ejs");
 
 app.use(express.static("public"));
 
-app.get("/api", (req, res) => {
+app.get("/pubs", (req, res) => {
     db.query('select * from pub;', (err, dbRes) => {
         
         res.json(dbRes.rows)
@@ -18,8 +18,9 @@ app.get("/api", (req, res) => {
     })
 });
 
-app.get("/beers", (req, res) => {
+app.get("/beers/:id", (req, res) => {
     //res.send("Beer info here");
+    console.log(req.params.id)
     var all_records = null;
     db.query("SELECT * from beertype;", (err, dbres) => {
         all_records = dbres.rows;
