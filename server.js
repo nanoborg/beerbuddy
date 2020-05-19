@@ -19,7 +19,14 @@ app.get("/api", (req, res) => {
 });
 
 app.get("/beers", (req, res) => {
-    res.send("Beef info here");
+    //res.send("Beer info here");
+    var all_records = null;
+    db.query("SELECT * from beertype;", (err, dbres) => {
+        all_records = dbres.rows;
+        //res.json(dbres.rows);
+        //console.log("Hello");
+        res.render("show", { beerTypes: all_records });
+    });
 });
 
 app.listen(port, () => {
