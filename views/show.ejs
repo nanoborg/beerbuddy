@@ -9,11 +9,15 @@
     <body>
         <h1>Show basic beer info</h1>
 
-        <p> 
+        <p>
             <% for (var i = 0; i < beerTypes.length; i++) { %>
-            <p><%=beerTypes[i].beertype%> </p>
-            <p><%=beerTypes[i].beerbrand%> </p>
-            <p><%=Number(beerTypes[i].avg).toFixed(2)%> </p>
+                <p><%=beerTypes[i].beertype%></p>
+                <p><%=beerTypes[i].beerbrand%></p>
+                <p><%=Number(beerTypes[i].avg).toFixed(2)%></p>
             <% }%>
+        
+        </p>
+
+        <p>Insert link here to new beer rating. Need to pass the pub id to the page. Come back to later.</p>
     </body>
 </html>

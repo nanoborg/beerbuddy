@@ -1,10 +1,20 @@
 const pg = require("pg");
 
-const pool = new pg.Pool({
-    database: "beerbuddy",
-    // for Shallesh....
-    // password: 'beer'
-});
+const pool;
+
+if (process.env.UBUNTU_DB_PASSWORD) {
+    pool = new pg.Pool({
+        database: "beerbuddy",
+        password: process.env.UBUNTU_DB_PASSWORD,
+        multipleStatements: true,
+    });
+        
+} else {
+    pool = new pg.Pool({
+        database: "beerbuddy",
+        multipleStatements: true,
+    });
+}
 
 module.exports = {
     query: (sql, params, callback) => {
