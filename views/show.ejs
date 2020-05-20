@@ -11,8 +11,8 @@
 
         <p>
             <% for (var i = 0; i < beerTypes.length; i++) { %>
-                <p><%=beerTypes[i].beertype%></p>
-                <p><%=beerTypes[i].beerbrand%></p>
+                <%=beerTypes[i].beertype%> || <%=beerTypes[i].beerbrand%>
+                
                 <p><%=Number(beerTypes[i].avg).toFixed(2)%></p>
             <% }%>
         
