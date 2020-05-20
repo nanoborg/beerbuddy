@@ -39,7 +39,6 @@ app.get("/beers/new", (req, res) => {
             //return dbres.rows;
             beertype = dbres.rows;
             console.log(beertype);
-
             db.query("select * from beerbrand;", function (Err, dbres) {
                 //return dbres.rows;
                 beerbrand = dbres.rows;
@@ -49,8 +48,8 @@ app.get("/beers/new", (req, res) => {
                     // allBeerBrands: allBeerBrands,
                     // allBeerTypes: allBeerTypes,
                     pubInfo: pubInfo,
-                    beertype: beertype,
-                    beerbrand: beerbrand,
+                    beertypes: beertype,
+                    beerbrands: beerbrand,
                 });
             });
         });
@@ -83,7 +82,7 @@ app.get("/beers/:id", (req, res) => {
     console.log(req.params.id);
     var all_records = null;
     db.query(
-        "select avg(rating), beertype.beertype, beerbrand.beerbrand from rating, pub,beertype,beerbrand where rating.pub_id = pub.id and pub.id=2 and beertype.id = rating.beertype and beerbrand.id = rating.beerbrand_id group by beertype.beertype,beerbrand.beerbrand;",
+        "select avg(rating), beertype.beertype, beerbrand.beerbrand from rating, pub,beertype,beerbrand where rating.pub_id = pub.id and pub.id=1 and beertype.id = rating.beertype and beerbrand.id = rating.beerbrand_id group by beertype.beertype,beerbrand.beerbrand;",
         (err, dbres) => {
             all_records = dbres.rows;
             //res.json(dbres.rows);

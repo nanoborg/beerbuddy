@@ -41,6 +41,8 @@ CREATE TABLE rating (
     FOREIGN KEY (beertype) REFERENCES beertype (id)
 );
 
+
+
 -- estblish pubs
 INSERT INTO pub (pubname,address,postcode,Suburb,date_last_review, LAT,Long) VALUES ('Players On Lygon','192-202 Lygon Street',3053,'Carlton','2020-05-19',-37.8024641,144.9670937);
 INSERT INTO pub (pubname,address,postcode,Suburb,date_last_review, LAT,Long) VALUES ('Bar Centrale','160-162 Lygon Street',3053,'Carlton','2020-05-19',-37.80344128,144.9667701);
@@ -93,3 +95,13 @@ INSERT INTO rating (rating,pub_id,beerbrand_id,beertype) VALUES (3,1,1,1);
 INSERT INTO rating (rating,pub_id,beerbrand_id,beertype) VALUES (4,2,1,1);
 INSERT INTO rating (rating,pub_id,beerbrand_id,beertype) VALUES (2,2,1,2);
 INSERT INTO rating (rating,pub_id,beerbrand_id,beertype) VALUES (3,2,1,2);
+
+-- updates to ratings to test SQL logic for inserting rating and pub update
+INSERT INTO rating (rating, pub_id, beerbrand_id, beertype) VALUES (5,1,1,2);
+INSERT INTO rating (rating, pub_id, beerbrand_id, beertype) VALUES (4,1,1,3);
+INSERT INTO rating (rating, pub_id, beerbrand_id, beertype) VALUES (3,1,1,4);
+INSERT INTO rating (rating, pub_id, beerbrand_id, beertype) VALUES (2,1,1,5);
+INSERT INTO rating (rating, pub_id, beerbrand_id, beertype) VALUES (1,1,1,6);
+INSERT INTO rating (rating, pub_id, beerbrand_id, beertype) VALUES (5,1,1,6);
+
+UPDATE pub SET is_pub_ratedB='T', date_last_review='2020-05-20' WHERE pub.id = 1;
