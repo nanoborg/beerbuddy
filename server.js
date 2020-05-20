@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 const db = require("./db/config.js");
 
-var bodyParser = require('body-parser');
+var bodyParser = require("body-parser");
 app.use(bodyParser());
 // app.use(bodyParser.urlencoded());
 
@@ -24,12 +24,11 @@ app.get("/pubs", (req, res) => {
     });
 });
 
-app.get('/pubs/new', (req, res) => {
-    res.render('pubs/new', {
-        address: req.query
-
-    })
-})
+app.get("/pubs/new", (req, res) => {
+    res.render("pubs/new", {
+        address: req.query,
+    });
+});
 
 app.get("/beers/new/:id", (req, res) => {
     var pubInfo = null;
@@ -41,7 +40,6 @@ app.get("/beers/new/:id", (req, res) => {
         pubInfo = dbres.rows;
         console.log(pubInfo[0].pubname);
         db.query("Select * from beertype;", function (Err, dbres) {
-
             beertype = dbres.rows;
             console.log(beertype);
             db.query("select * from beerbrand;", function (Err, dbres) {
@@ -62,45 +60,77 @@ app.get("/beers/:id", (req, res) => {
     // console.log(req);
     let id = Number(req.params.id);
     var all_records = null;
+    var pubInfo = null;
     db.query(
         `select avg(rating), beertype.beertype, beerbrand.beerbrand from rating, pub,beertype,beerbrand where rating.pub_id = pub.id and pub.id=${id} and beertype.id = rating.beertype and beerbrand.id = rating.beerbrand_id group by beertype.beertype,beerbrand.beerbrand;`,
         (err, dbres) => {
-            // if(dbres.rows)
             all_records = dbres.rows;
-            // console.log(dbres.rows);
-            res.render("show", { 
-                beerTypes: all_records,
-                pubId: id
-             });
+            console.log(`SELECT * from pub where id = ${id}`);
+            db.query(`SELECT * from pub where id = ${id}`, (err, dbres) => {
+                pubInfo = dbres.rows;
+                console.log(`What do we see for pubinfo ${pubInfo}`);
+                res.render("show", {
+                    beerTypes: all_records,
+                    pubInfo: pubInfo,
+                });
+            });
         }
     );
+
+    app.post("/rating/:id", (req, res) => {
+        // console.log(req);
+        let id = Number(req.body.id);
+        let beerType = Number(req.body.beerType);
+        let beerbrand = Number(req.body.beerBrand);
+        let rating = Number(req.body.rating);
+        let today = new Date();
+        let date =
+            today.getFullYear() +
+            "-" +
+            (today.getMonth() + 1) +
+            "-" +
+            today.getDate();
+        db.query(
+            `UPDATE pub SET is_pub_ratedB='T', date_last_review='${date}' WHERE pub.id = ${id};`,
+            (err, dbres) => {
+                all_records = dbres.rows;
+                db.query(
+                    `INSERT INTO rating (rating, pub_id, beerbrand_id, beertype) VALUES (${rating},${id},${beerbrand},${beerType});`,
+                    (err, dbres) => {
+                        all_records = dbres.rows;
+                        res.redirect("/");
+                    }
+                );
+            }
+        );
+    });
 });
 
-app.post("/rating/:id", (req, res) => {
-    // console.log(req);
-    let id = Number(req.body.id);
-    let beerType = Number(req.body.beerType);
-    let beerbrand = Number(req.body.beerBrand);
-    let rating = Number(req.body.rating);
-    let today = new Date();
-    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    // console.log(today);
-    // console.log(date);
+app.post("/pubs/new", (req, res) => {
+    // let id = Number(req.body.id);
+    let pubName = req.body.pubName;
+    let street = req.body.streetAddress;
+    let postCode = req.body.postCode;
+    let suburb = req.body.suburb;
+    let lat = Number(req.body.lat);
+    let long = Number(req.body.long);
+
+    let pubID = null;
+
     db.query(
-        `UPDATE pub SET is_pub_ratedB='T', date_last_review='${date}' WHERE pub.id = ${id};`,
-        (err, dbres) => {
-            all_records = dbres.rows;
+        `INSERT INTO pub (pubname,address,postcode,Suburb, LAT,Long) VALUES ('${pubName}','${street}', ${postCode},'${suburb}', ${lat}, ${long});`,
+        (err, dbRes) => {
             db.query(
-                `INSERT INTO rating (rating, pub_id, beerbrand_id, beertype) VALUES (${rating},${id},${beerbrand},${beerType});`,
+                `SELECT * from pub where pubName = '${pubName}'`,
                 (err, dbres) => {
-                    all_records = dbres.rows;
-                    res.redirect("/");
+                    pubID = dbres.rows[0].id;
+                    res.redirect(`/beers/new/${pubID}`);
                 }
             );
         }
     );
 });
-    
+
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
 });
