@@ -7,8 +7,11 @@
         <title>Show all beer</title>
     </head>
     <body>
-        <h1>Show basic beer info</h1>
-
+        <h1>The pub name is</h1>
+        <p>
+            <%= pubInfo[0].pubname %>
+        </p>
+        
         <p>
             <% for (var i = 0; i < beerTypes.length; i++) { %>
                 <%=beerTypes[i].beertype%> || <%=beerTypes[i].beerbrand%>
@@ -16,8 +19,8 @@
                 <p><%=Number(beerTypes[i].avg).toFixed(2)%></p>
             <% }%>
         
-        </p>
+        </p>    
 
-        <a href="/beers/new/<%= pubId %>">Rate Beers</a>
+        <a href="/beers/new/<%= pubInfo[0].id %>">Rate Beers</a>
     </body>
 </html>
