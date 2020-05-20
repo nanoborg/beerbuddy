@@ -10,8 +10,8 @@
         <h1>Please enter your rating</h1>
 
         <form action="/rating/<%=pubInfo[0].id %>" method="post">
-            <input type="hidden" name="_method" value="patch" />
-            <input type="hidden" name="id" value="<%=pubInfo[0].id %>" >
+            <!-- <input type="hidden" name="_method" value="patch" /> -->
+            <input type="hidden" name="id" value="<%=pubInfo[0].id %>" />
             <label>Pub name:</label>
             <label for=""><%=pubInfo[0].pubname%></label>
             <br />
