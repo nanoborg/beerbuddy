@@ -32,31 +32,54 @@ app.get("/beers/:id", (req, res) => {
 });
 
 app.get("/beers/new", (req, res) => {
-    // obtain the correct pub
+    // // obtain the correct pub
     var pubInfo = null;
-    db.query("select * from pub where id=1;", (err, dbres) => {
+    var beertype = null;
+    var beerbrand = null;
+    db.query("select * from pub where id=1;", function (err, dbres) {
         pubInfo = dbres.rows;
-        //return dbres.rows;
+        console.log(pubInfo[0].pubname);
+        db.query("Select * from beertype;", function (Err, dbres) {
+            //return dbres.rows;
+            beertype = dbres.rows;
+            console.log(beertype);
 
-        // obtain all beer types
-        // var allBeerTypes = null;
-        // db.query("SELECT * from beertype;", (err, dbres) => {
-        //     allBeerTypes = dbres.rows;
-        // });
-        // // obtain all beer brands
-        // var allBeerBrands = null;
-        // db.query("SELECT * from beerbrand;", (err, dbres) => {
-        //     allBeerBrands = dbres.rows;
-        // });
+            db.query("select * from beerbrand;", function (Err, dbres) {
+                //return dbres.rows;
+                beerbrand = dbres.rows;
+                console.log(beerbrand);
 
-        // console.log(allBeerTypes);
-        // console.log(allBeerBrands);
-        res.render("new", {
-            // allBeerBrands: allBeerBrands,
-            // allBeerTypes: allBeerTypes,
-            pubInfo: pubInfo,
+                res.render("new", {
+                    // allBeerBrands: allBeerBrands,
+                    // allBeerTypes: allBeerTypes,
+                    pubInfo: pubInfo,
+                    beertype: beertype,
+                    beerbrand: beerbrand,
+                });
+            });
         });
     });
+
+    // // obtain all beer types
+    // var allBeerTypes = null;
+    // db.query("SELECT * from beertype;", (err, dbres) => {
+    //     allBeerTypes = dbres.rows;
+    //     console.log(allBeerTypes);
+    // });
+    // // obtain all beer brands
+    // var allBeerBrands = null;
+    // db.query("SELECT * from beerbrand;", (err, dbres) => {
+    //     allBeerBrands = dbres.rows;
+    //     console.log(allBeerBrands);
+    // });
+
+    // // console.log(allBeerTypes);
+    // // console.log(allBeerBrands);
+    // res.render("new", {
+    //     // allBeerBrands: allBeerBrands,
+    //     // allBeerTypes: allBeerTypes,
+    //     pubInfo: pubInfo,
+    // });
 });
 
 app.listen(port, () => {
