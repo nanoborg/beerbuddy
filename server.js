@@ -76,34 +76,33 @@ app.get("/beers/:id", (req, res) => {
             });
         }
     );
-
-    app.post("/rating/:id", (req, res) => {
-        // console.log(req);
-        let id = Number(req.body.id);
-        let beerType = Number(req.body.beerType);
-        let beerbrand = Number(req.body.beerBrand);
-        let rating = Number(req.body.rating);
-        let today = new Date();
-        let date =
-            today.getFullYear() +
-            "-" +
-            (today.getMonth() + 1) +
-            "-" +
-            today.getDate();
-        db.query(
-            `UPDATE pub SET is_pub_ratedB='T', date_last_review='${date}' WHERE pub.id = ${id};`,
-            (err, dbres) => {
-                all_records = dbres.rows;
-                db.query(
-                    `INSERT INTO rating (rating, pub_id, beerbrand_id, beertype) VALUES (${rating},${id},${beerbrand},${beerType});`,
-                    (err, dbres) => {
-                        all_records = dbres.rows;
-                        res.redirect("/");
-                    }
-                );
-            }
-        );
-    });
+});
+app.post("/rating/:id", (req, res) => {
+    console.log(`HERE I AM within rating : id ${req}`);
+    let id = Number(req.body.id);
+    let beerType = Number(req.body.beerType);
+    let beerbrand = Number(req.body.beerBrand);
+    let rating = Number(req.body.rating);
+    let today = new Date();
+    let date =
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate();
+    db.query(
+        `UPDATE pub SET is_pub_ratedB='T', date_last_review='${date}' WHERE pub.id = ${id};`,
+        (err, dbres) => {
+            all_records = dbres.rows;
+            db.query(
+                `INSERT INTO rating (rating, pub_id, beerbrand_id, beertype) VALUES (${rating},${id},${beerbrand},${beerType});`,
+                (err, dbres) => {
+                    all_records = dbres.rows;
+                    res.redirect("/");
+                }
+            );
+        }
+    );
 });
 
 app.post("/pubs/new", (req, res) => {
