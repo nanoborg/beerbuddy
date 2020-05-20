@@ -1,36 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="/style.css" />
+        <script
+            type="text/javascript"
+            src="http://www.bing.com/api/maps/mapcontrol?callback=getMap&key=AjSzMJV7gcszWBJEr05Z99O6O1Qc61m7E09vz2cyN6zjJYNGJ_RE36WjYCrYb3LD"
+            async
+            defer
+        ></script>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/style.css">
-    <script type='text/javascript'
-        src='http://www.bing.com/api/maps/mapcontrol?callback=getMap&key=AjSzMJV7gcszWBJEr05Z99O6O1Qc61m7E09vz2cyN6zjJYNGJ_RE36WjYCrYb3LD'
-        async defer></script>
-</head>
-
-<body>
-    <div id='map'>
-
-    </div>
-    <div class='add-pub-options-container'>
-        <h3>Add Pub By</h3>
-        <div class='add-pub-options-buttons'>
-            <button class='add-by-location visible'>current location</button>
-            <button class='add-by-address visible'>enter address</button>
+    <body>
+        <div id="map"></div>
+        <div class="add-pub-options-container">
+            <h3>Add Pub By</h3>
+            <div class="add-pub-options-buttons">
+                <button class="add-by-location button-addPub visible">
+                    current location
+                </button>
+                <button class="add-by-address button-addPub visible">
+                    enter address
+                </button>
+            </div>
         </div>
-    </div>
 
-    <div class="input-dialog-box">
-        <div class='searchBoxContainer'>
-            <input type='text' class='searchBox' placeholder="enter street address" focus />
+        <div class="input-dialog-box">
+            <div class="searchBoxContainer">
+                <input
+                    type="text"
+                    class="searchBox"
+                    placeholder="enter street address"
+                    focus
+                />
+            </div>
         </div>
-    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-    <script src="client.js"></script>
-</body>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+        <script src="client.js"></script>
+    </body>
 </html>
