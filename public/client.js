@@ -3,9 +3,11 @@ let loc = null;
 let map = null;
 let searchManager = null;
 
-const btnAddLocation = document.querySelector(".add-by-location");
-const btnAddAddress = document.querySelector(".add-by-address");
 
+const btnAddLocation = document.querySelector('.add-by-location')
+const btnAddAddress = document.querySelector('.add-by-address')
+const dialogInputBox = document.querySelector('.input-dialog-box')
+const inputBox = document.querySelector('searchBox')
 const handlePinClick = (e) => {
     // console.log(e.target)
     let path = `/beers/${e.target.metadata.id}`;
@@ -29,21 +31,25 @@ function reverseGeocode(loc) {
             location: loc,
             callback: function (curLoc) {
                 //Tell the user the name of the result.
-                console.log(curLoc.address.addressLine);
-                // return r.name
-                // alert(r.name);
-                let path = `/pubs/new?address=${curLoc.address.addressLine}&lat=${loc.latitude}&long=${loc.longitude}&postCode=${curLoc.address.postalCode}&suburb=${curLoc.address.locality}`;
-                // console.log(path)
-                location = path;
+                console.log(curLoc.address.addressLine)
+
+                if (curLoc.address.addressLine === undefined ||
+                    curLoc.address.postalCode === undefined ||
+                    curLoc.address.locality === undefined
+                ) {
+                    document.querySelector("h3").textContent = "Unable to use current location, please enter in address."
+                    handleAddAddress();
+                } else {
+
+                    let path = `/pubs/new?address=${curLoc.address.addressLine}&lat=${loc.latitude}&long=${loc.longitude}&postCode=${curLoc.address.postalCode}&suburb=${curLoc.address.locality}`
+                    location = path;
+                }
             },
             errorCallback: function (e) {
                 //If there is an error, alert the user about it.
-                // alert("Unable to reverse geocode location.");
-                // return "address not found"
-                let path = `/pubs/new?address=address not found&lat=${loc.latitude}&long=${loc.longitude}`;
-                // console.log(path)
-                location = path;
-            },
+                document.querySelector("h3").textContent = "Unable to use current location, please enter in address."
+                handleAddAddress();
+            }
         };
 
         //Make the reverse geocode request.
@@ -56,6 +62,21 @@ function getMap() {
         center: new Microsoft.Maps.Location(-37.8136, 144.9631),
         zoom: 9,
     });
+
+    Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
+        callback: function () {
+            var manager = new Microsoft.Maps.AutosuggestManager({
+                placeSuggestions: false
+            });
+            manager.attachAutosuggest('.searchBox', '.searchBoxContainer', selectedSuggestion);
+        },
+        errorCallback: function (msg) {
+            alert(msg);
+        },
+        credentials: 'Ap77Q31MJhCP2ZZX2OklF0nVKFIP2AhgxeChi6y2pEvjGmJhN5xM-h1J39gwaSAX'
+    });
+
+
     var center = map.getCenter();
 
     const path = "/pubs";
@@ -108,9 +129,28 @@ const handleAddLocation = (e) => {
     });
 };
 
+function selectedSuggestion(curLoc) {
+    console.log(curLoc);
+    //Tell the user the name of the result.
+    console.log(curLoc.address.addressLine)
+    // return r.name
+    // alert(r.name);
+    let path = `/pubs/new?address=${curLoc.address.addressLine}&lat=${curLoc.location.latitude}&long=${curLoc.location.longitude}&postCode=${curLoc.address.postalCode}&suburb=${curLoc.address.locality}`
+    // console.log(path)
+    location = path;
+
+
+}
 const handleAddAddress = (e) => {
-    console.log("button address");
-};
+    console.log('button address')
+    dialogInputBox.autofocus = true;
+    dialogInputBox.classList.toggle('visible');
+    btnAddAddress.classList.toggle('visible');
+    btnAddLocation.classList.toggle('visible');
+
+
+
+}
 
 btnAddLocation.addEventListener("click", handleAddLocation);
 btnAddAddress.addEventListener("click", handleAddAddress);
