@@ -22,8 +22,10 @@ app.get("/pubs", (req, res) => {
 
 app.get('/pubs/new', (req, res) => {
     // req.query.currentLocation
+    console.log(req.query)
     res.render('pubs/new', {
-        currentLocation: req.query.currentLocation
+        address: req.query
+
     })
 })
 
