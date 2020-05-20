@@ -20,6 +20,13 @@ app.get("/pubs", (req, res) => {
     });
 });
 
+app.get('/pubs/new', (req, res) => {
+    // req.query.currentLocation
+    res.render('pubs/new', {
+        currentLocation: req.query.currentLocation
+    })
+})
+
 app.get("/beers/new", (req, res) => {
     // // obtain the correct pub
     var pubInfo = null;
