@@ -3,17 +3,11 @@ let loc = null;
 let map = null;
 let searchManager = null;
 
-<<<<<<< HEAD
-const btnAddLocation = document.querySelector(".add-by-location");
-const btnAddAddress = document.querySelector(".add-by-address");
-
-=======
 
 const btnAddLocation = document.querySelector('.add-by-location')
 const btnAddAddress = document.querySelector('.add-by-address')
 const dialogInputBox = document.querySelector('.input-dialog-box')
 const inputBox = document.querySelector('searchBox')
->>>>>>> add pub by address using auto suggest
 const handlePinClick = (e) => {
     // console.log(e.target)
     let path = `/beers/${e.target.metadata.id}`;
@@ -148,10 +142,6 @@ function selectedSuggestion(curLoc) {
 
 }
 const handleAddAddress = (e) => {
-<<<<<<< HEAD
-    console.log("button address");
-};
-=======
     console.log('button address')
     dialogInputBox.autofocus = true;
     dialogInputBox.classList.toggle('visible');
@@ -161,7 +151,6 @@ const handleAddAddress = (e) => {
 
 
 }
->>>>>>> add pub by address using auto suggest
 
 btnAddLocation.addEventListener("click", handleAddLocation);
 btnAddAddress.addEventListener("click", handleAddAddress);
