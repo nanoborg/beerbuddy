@@ -9,9 +9,9 @@
     <body>
         <h1>Please enter your rating</h1>
 
-        <form action="" method="post">
-            <input type="hidden" value="<%=pubInfo[0].id %>" />
-
+        <form action="/rating/<%=pubInfo[0].id %>" method="post">
+            <input type="hidden" name="_method" value="patch" />
+            <input type="hidden" name="id" value="<%=pubInfo[0].id %>" >
             <label>Pub name:</label>
             <label for=""><%=pubInfo[0].pubname%></label>
             <br />
@@ -27,7 +27,7 @@
             <br />
 
             <label for="">Beer Brand</label>
-            <select name="beerBrand" required>
+            <select name="beerBrand" id="beerBrand" required>
                 <% beerbrands.forEach(beerbrand => { %>
                 <option value="<%= beerbrand.id%>"
                     ><%=beerbrand.beerbrand%>
@@ -36,7 +36,7 @@
             </select>
             <br />
             <label for="">Beer Rating</label>
-            <select name="" id="">
+            <select name="rating" id="" required>
                 <option value="5">5-Star</option>
                 <option value="4">4-Star</option>
                 <option value="3">3-Star</option>
