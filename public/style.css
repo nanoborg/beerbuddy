@@ -1,3 +1,49 @@
 #map {
     height: 500px;
 }
+
+/* .searchBoxContainer {
+    
+} */
+
+.searchBox {
+    margin: 0 20%;
+    width: 60%;
+}
+
+.input-dialog-box {
+    display: none;
+    margin: 0 20%;
+    width: 60%;
+    background-color: aqua;
+    border: 2px solid black;
+
+}
+
+.visible {
+    display: grid;
+    align-items: center;
+    height: 100px
+}
+
+button {
+    display: none;
+    grid-row-start: 2;
+    width: 60%;
+    margin: auto;
+}
+
+/* .add-pub-options-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: .25fr 1fr;
+
+} */
+.add-pub-options-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+h3 {
+    text-align: center;
+}

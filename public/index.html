@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/style.css">
     <script type='text/javascript'
-   
-    src='http://www.bing.com/api/maps/mapcontrol?callback=getMap&key=AjSzMJV7gcszWBJEr05Z99O6O1Qc61m7E09vz2cyN6zjJYNGJ_RE36WjYCrYb3LD' 
-    async defer></script>
+        src='http://www.bing.com/api/maps/mapcontrol?callback=getMap&key=AjSzMJV7gcszWBJEr05Z99O6O1Qc61m7E09vz2cyN6zjJYNGJ_RE36WjYCrYb3LD'
+        async defer></script>
 </head>
+
 <body>
     <div id='map'>
-        
-    </div>
-    <button class='add-by-location'>add by location</button>
-    <button class='add-by-address'>add by address</button>
-    <!-- <a href="/pubs/new?currentLocation=false">add pub by address</a>
-    <a href="/pubs/new?currentLocation=true">add pub by current location</a> -->
 
+    </div>
+    <div class='add-pub-options-container'>
+        <h3>Add Pub By</h3>
+        <div class='add-pub-options-buttons'>
+            <button class='add-by-location visible'>current location</button>
+            <button class='add-by-address visible'>enter address</button>
+        </div>
+    </div>
+
+    <div class="input-dialog-box">
+        <div class='searchBoxContainer'>
+            <input type='text' class='searchBox' placeholder="enter street address" focus />
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script src="client.js"></script>
 </body>
+
 </html>
