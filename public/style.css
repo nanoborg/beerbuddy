@@ -17,20 +17,19 @@
     width: 60%;
     background-color: aqua;
     border: 2px solid black;
+}
 
+.button-addPub {
+    display: none;
+    grid-row-start: 2;
+    width: 60%;
+    margin: auto;
 }
 
 .visible {
     display: grid;
     align-items: center;
-    height: 100px
-}
-
-button {
-    display: none;
-    grid-row-start: 2;
-    width: 60%;
-    margin: auto;
+    height: 100px;
 }
 
 /* .add-pub-options-container {
