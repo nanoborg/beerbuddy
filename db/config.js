@@ -1,6 +1,6 @@
 const pg = require("pg");
 
-const pool;
+let pool;
 
 if (process.env.UBUNTU_DB_PASSWORD) {
     pool = new pg.Pool({
