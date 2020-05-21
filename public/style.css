@@ -54,14 +54,13 @@ button {
     margin: 4px 2px;
     cursor: pointer;
 }
-.div-form-submit-buttons{
+.div-form-submit-buttons {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 10px;
     justify-items: center;
 }
 .div-form-submit-buttons > button {
-    
     font-size: 1rem;
     background: dodgerblue;
     color: white;
@@ -138,7 +137,6 @@ button {
     font-size: 1.5rem;
 }
 .search-filter-container {
-
 }
 
 .input-dialog-box {
