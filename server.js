@@ -35,7 +35,10 @@ app.get("/beerTypes", (req, res) => {
         res.json(dbRes.rows);
     });
 });
-
+app.get("/contact", (req, res) => {
+    
+        res.render("contact.ejs");
+});
 
 app.get("/pubs/beerbrand/:id", (req, res) => {
     var id = Number(req.params.id);
@@ -147,7 +150,7 @@ app.post("/pubs/new", (req, res) => {
         `INSERT INTO pub (pubname,address,postcode,Suburb,is_pub_ratedB, LAT,Long) VALUES ('${pubName}','${street}', ${postCode},'${suburb}',${false}, ${lat}, ${long});`,
         (err, dbRes) => {
             db.query(
-                `SELECT * from pub where pubName = '${pubName}'`,
+                `SELECT * from pub where pubname = '${pubName}'`,
                 (err, dbres) => {
                     pubID = dbres.rows[0].id;
                     res.redirect(`/beers/new/${pubID}`);
