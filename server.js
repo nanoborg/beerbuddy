@@ -154,13 +154,13 @@ app.post("/pubs/new", (req, res) => {
     let long = Number(req.body.long);
 
     let pubID = null;
-    let sql = escape(`INSERT INTO pub (pubname,address,postcode,Suburb,is_pub_ratedB, LAT,Long) VALUES (%L,'${street}', ${postCode},'${suburb}',${false}, ${lat}, ${long});`,`${pubName}`);
+    let sql = escape(`INSERT INTO pub (pubname,address,postcode,Suburb,is_pub_ratedB, LAT,Long) VALUES (%L,'${street}', ${postCode},'${suburb}',${false}, ${lat}, ${long});`, `${pubName}`);
     console.log(sql);
     db.query(
         sql,
         (err, dbRes) => {
             db.query(
-                escape(`SELECT * from pub where pubname = (%L);`,`${pubName}`),
+                escape(`SELECT * from pub where pubname = (%L);`, `${pubName}`),
                 (err, dbres) => {
                     pubID = dbres.rows[0].id;
                     res.redirect(`/beers/new/${pubID}`);
