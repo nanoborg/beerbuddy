@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/style.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Galada&display=swap" rel="stylesheet">
         <title>Show all beer</title>
     </head>
     <body>
@@ -30,8 +31,12 @@
                 <% for (var i = 0; i < beerTypes.length; i++) { %>
                     <%=beerTypes[i].beertype%> || <%=beerTypes[i].beerbrand%>
                     
-                    <p><%=Number(beerTypes[i].avg).toFixed(2)%></p>
-                <% }%>
+                    <p><% var star = Math.round(Number(beerTypes[i].avg).toFixed(2))%>
+                        <% for (var j=0; j < star; j ++) { %>
+                            <span style='font-size:35px;'>&#9733;</span>
+                        <% } %>
+                    </p>
+                <% } %>
             
             </p>  
             <div class="div-form-submit-buttons">
