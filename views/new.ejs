@@ -15,24 +15,30 @@
                 <a href="#about">About</a>
             </div>
         </div>
-        <h1>Please enter your Beer rating:</h1>
 
-        <form action="/rating/<%=pubInfo[0].id %>" method="post">
-            <!-- <input type="hidden" name="_method" value="patch" /> -->
-            <input type="hidden" name="id" value="<%=pubInfo[0].id %>" />
-            <label>Pub name:</label>
-            <label for=""><%=pubInfo[0].pubname%></label>
-            <br />
+        <div class="borderForm">
+            <h1>Please enter your Beer rating:</h1>
+            <div class="pubForm">
+                <form action="/rating/<%=pubInfo[0].id %>" method="post">
+                    <!-- <input type="hidden" name="_method" value="patch" /> -->
+                    <input
+                        type="hidden"
+                        name="id"
+                        value="<%=pubInfo[0].id %>"
+                    />
+                    <label>Pub name:</label>
+                    <label for=""><%=pubInfo[0].pubname%></label>
+                    <br />
 
-            <label for="">Beer Type</label>
-            <select name="beerType" required>
-                <% beertypes.forEach(beertype => { %>
-                <option value="<%= beertype.id%>"
-                    ><%=beertype.beertype%>
-                </option>
-                <% }); %>
-            </select>
-            <br />
+                    <label for="">Beer Type</label>
+                    <select name="beerType" required>
+                        <% beertypes.forEach(beertype => { %>
+                        <option value="<%= beertype.id%>"
+                            ><%=beertype.beertype%>
+                        </option>
+                        <% }); %>
+                    </select>
+                    <br />
 
             <label for="">Beer Brand</label>
             <select name="beerBrand" id="beerBrand" required>
