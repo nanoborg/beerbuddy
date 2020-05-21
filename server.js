@@ -30,6 +30,12 @@ app.get("/beerBrands", (req, res) => {
     });
 });
 
+app.get("/beerTypes", (req, res) => {
+    db.query("select * from beertype;", (err, dbRes) => {
+        res.json(dbRes.rows);
+    });
+});
+
 
 app.get("/pubs/beerbrand/:id", (req, res) => {
     var id = Number(req.params.id);
@@ -37,7 +43,14 @@ app.get("/pubs/beerbrand/:id", (req, res) => {
         res.json(dbRes.rows);
     });
 });
-
+///pubs/beertype/
+app.get("/pubs/beertype/:id", (req, res) => {
+    var id = Number(req.params.id);
+    db.query(`select distinct pub.id, pubname,LAT, Long, is_pub_ratedB from pub,rating where beertype = ${id} and rating.pub_id = pub.id;
+    `, (err, dbRes) => {
+        res.json(dbRes.rows);
+    });
+});
 app.get("/pubs/new", (req, res) => {
     res.render("pubs/new", {
         address: req.query,
