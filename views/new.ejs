@@ -39,30 +39,41 @@
                 </select>
                 <br />
 
-        <label for="">Beer Brand:</label>
-        <select name="beerBrand" id="beerBrand" required>
-            <% beerbrands.forEach(beerbrand => { %>
-            <option value="<%= beerbrand.id%>"
-                ><%=beerbrand.beerbrand%>
-            </option>
-            <% }); %>
-        </select>
-        <br />
-        <label for="">Beer Rating:</label>
-        <select name="rating" id="" required>
-            <option value="5">5-Star</option>
-            <option value="4">4-Star</option>
-            <option value="3">3-Star</option>
-            <option value="2">2-Star</option>
-            <option value="1">1-Star</option>
-        </select>
-        <br />
-        <div class="div-form-submit-buttons">
-            <button>Submit</button>
-            <button type="button" onClick="javascript:location.href = '/';">Return</button>
-        </div>
-    </form>
-        </div>
+
+                    <label for="">Beer Type:</label>
+                    <select name="beerType" required>
+                        <% beertypes.forEach(beertype => { %>
+                        <option value="<%= beertype.id%>"
+                            ><%=beertype.beertype%>
+                        </option>
+                        <% }); %>
+                    </select>
+                    <br />
+
+            <label for="">Beer Brand:</label>
+            <select name="beerBrand" id="beerBrand" required>
+                <% beerbrands.forEach(beerbrand => { %>
+                <option value="<%= beerbrand.id%>"
+                    ><%=beerbrand.beerbrand%>
+                </option>
+                <% }); %>
+            </select>
+            <br />
+            <label for="">Beer Rating:</label>
+            <select name="rating" id="" required>
+                <option value="5">5-Star</option>
+                <option value="4">4-Star</option>
+                <option value="3">3-Star</option>
+                <option value="2">2-Star</option>
+                <option value="1">1-Star</option>
+            </select>
+            <br/>
+            <div class="div-form-submit-buttons">
+                <button type="button" onClick="javascript:location.href = '/';">Return</button>
+                <button>Submit</button>
+            </div>
+        </form>
+
         <div class="footer">
             <p>&copy; 2020 By: Shailesh, Peter, Tim & Glen</p>
         </div>

@@ -23,6 +23,11 @@ select {
     font-size: 1.5rem;
 }
 
+button {
+    width: 100%;
+    border-radius: 10px;
+}
+
 .pubForm,
 .beerRatingForm {
     text-align: center;
@@ -52,6 +57,7 @@ select {
 .div-form-submit-buttons{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10px;
     justify-items: center;
 }
 .div-form-submit-buttons > button {
@@ -62,7 +68,6 @@ select {
     border-style: outset;
     border-color: #0066a2;
     height: 50px;
-    width: 50%;
     text-shadow: none;
 }
 
@@ -132,6 +137,9 @@ select {
     width: 60%;
     font-size: 1.5rem;
 }
+.search-filter-container {
+
+}
 
 .input-dialog-box {
     display: none;
@@ -173,6 +181,12 @@ select {
 .add-pub-options-buttons {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+}
+
+#search-filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 5px;
 }
 h1,
 h3 {
