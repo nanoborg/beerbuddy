@@ -14,7 +14,7 @@ if (process.env.PRODUCTION) {
     })
 } else {
     pool = new pg.Pool({
-        database: 'my_local_database_name',
+        database: "beerbuddy",
     })
 }
 
