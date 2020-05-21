@@ -14,19 +14,27 @@
     </head>
 
     <body>
-        <div id="search-filters">
-            
+        <div class="header">
+            <a href="#default" class="logo">BeerBuddy</a>
+            <div class="header-right">
+                <a class="active" href="#home">Home</a>
+                <a href="#contact">Contact</a>
+                <a href="#about">About</a>
+            </div>
         </div>
+
+        <div id="search-filters"></div>
+
         <div id="map"></div>
-        
+
         <div class="add-pub-options-container">
-            <h3>Add Pub By</h3>
+            <h3>Add your Pub either by</h3>
             <div class="add-pub-options-buttons">
                 <button class="add-by-location button-addPub visible">
-                    current location
+                    Your current location
                 </button>
                 <button class="add-by-address button-addPub visible">
-                    enter address
+                    Enter address
                 </button>
             </div>
         </div>
@@ -40,6 +48,10 @@
                     focus
                 />
             </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2020 By: Shailesh, Peter, Tim & Glen</p>
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
