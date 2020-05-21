@@ -1,5 +1,7 @@
 #map {
     height: 500px;
+    /* box-shadow: -19px 3px 117px -10px rgba(0,0,0,0.82); */
+    border-radius: 12px;
 }
 
 * {
@@ -10,6 +12,8 @@ body {
     margin: 0 auto;
     width: 90%;
     font-family: Arial, Helvetica, sans-serif;
+    background-image: url(https://envato-shoebox-0.imgix.net/f309/08f0-c751-4da9-ba9f-62c7a94fd21f/_K4A7247.jpg?auto=compress%2Cformat&fit=max&mark=https%3A%2F%2Felements-assets.envato.com%2Fstatic%2Fwatermark2.png&markalign=center%2Cmiddle&markalpha=18&w=1600&s=15745df6fd33f570f570abb0259ca7d0);
+    background-size: cover;
 }
 form {
     display: inline-block;
@@ -34,9 +38,9 @@ button {
 }
 
 .borderForm {
-    margin: 10% auto;
+    margin: 20% auto;
     border-radius: 25px;
-    background: #f1f1f1;
+    background: rgba(241, 241, 241, .8);
     padding: 20px;
     width: 60%;
     text-align: center;
@@ -72,7 +76,7 @@ button {
 
 .header {
     overflow: hidden;
-    background-color: #f1f1f1;
+    background: rgba(241, 241, 241, 0);
     padding: 10px 10px;
 }
 
@@ -88,8 +92,9 @@ button {
 }
 
 .header a.logo {
-    font-size: 25px;
+    font-size: 65px;
     font-weight: bold;
+    font-family: 'Galada', cursive;
 }
 
 .header a:hover {
@@ -192,4 +197,16 @@ h3 {
 }
 h3 {
     font-size: 2rem;
+    font-family: 'Oleo Script', cursive;
+    color: white;
+    text-shadow: black;
+    margin: 10px;
+}
+
+h2 {
+    font-size: 70%;
+}
+
+.filter-title {
+    color: black;
 }
