@@ -16,22 +16,36 @@
             </div>
         </div>
 
-        
-        <h1>The pub name is</h1>
-        <p>
-            <%= pubInfo[0].pubname %>
-        </p>
+        <div class="borderForm">
+            <h1><%= pubInfo[0].pubname %></h1>
+            <p>
+                <%= pubInfo[0].address %>
+                <br/>
+                <%= pubInfo[0].suburb %>
+                <br/><%= pubInfo[0].postcode %>
 
-        <p>
-            <% for (var i = 0; i < beerTypes.length; i++) { %>
-                <%=beerTypes[i].beertype%> || <%=beerTypes[i].beerbrand%>
-                
-                <p><%=Number(beerTypes[i].avg).toFixed(2)%></p>
-            <% }%>
-        
-        </p>    
+            </p>
 
-        <a href="/beers/new/<%= pubInfo[0].id %>">Rate Beers</a>
+            <p>
+                <% for (var i = 0; i < beerTypes.length; i++) { %>
+                    <%=beerTypes[i].beertype%> || <%=beerTypes[i].beerbrand%>
+                    
+                    <p><%=Number(beerTypes[i].avg).toFixed(2)%></p>
+                <% }%>
+            
+            </p>  
+            <div class="div-form-submit-buttons">
+                <button
+                    type="button"
+                    onClick="javascript:location.href = '/beers/new/<%= pubInfo[0].id %>';">Rate Beers
+                </button>
+                <button
+                    type="button"
+                    onClick="javascript:location.href = '/';">Return
+                </button>
+            </div>
+           
+        </div>  
         <div class="footer">
             <p>&copy; 2020 By: Shailesh, Peter, Tim & Glen</p>
         </div>
