@@ -24,6 +24,20 @@ app.get("/pubs", (req, res) => {
     });
 });
 
+app.get("/beerBrands", (req, res) => {
+    db.query("select * from beerbrand;", (err, dbRes) => {
+        res.json(dbRes.rows);
+    });
+});
+
+
+app.get("/pubs/beerbrand/:id", (req, res) => {
+    var id = Number(req.params.id);
+    db.query(`select distinct pub.id, pubname,LAT, Long, is_pub_ratedB from pub,rating where rating.beerbrand_id = ${id};`, (err, dbRes) => {
+        res.json(dbRes.rows);
+    });
+});
+
 app.get("/pubs/new", (req, res) => {
     res.render("pubs/new", {
         address: req.query,
