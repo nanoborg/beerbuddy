@@ -39,7 +39,7 @@ app.get("/beerTypes", (req, res) => {
 
 app.get("/pubs/beerbrand/:id", (req, res) => {
     var id = Number(req.params.id);
-    db.query(`select distinct pub.id, pubname,LAT, Long, is_pub_ratedB from pub,rating where rating.beerbrand_id = ${id};`, (err, dbRes) => {
+    db.query(`select distinct pub.id, pubname,LAT, Long, is_pub_ratedB from pub,rating where rating.beerbrand_id = ${id} and rating.pub_id = pub.id;`, (err, dbRes) => {
         res.json(dbRes.rows);
     });
 });
