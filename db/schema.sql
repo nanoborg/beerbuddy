@@ -40,8 +40,8 @@ CREATE TABLE rating (
     FOREIGN KEY (beerbrand_id) REFERENCES beerbrand (id),
     FOREIGN KEY (beertype) REFERENCES beertype (id)
 );
-
-
+-- onchange dropdown event
+select * from pub,rating,beerbrand where beerbrand = 'James Squire Nine Tales Amber Ake' and pub.id = rating.id and rating.beerbrand_id= beerbrand.id;
 
 -- estblish pubs
 INSERT INTO pub (pubname,address,postcode,Suburb,date_last_review, LAT,Long) VALUES ('Players On Lygon','192-202 Lygon Street',3053,'Carlton','2020-05-19',-37.8024641,144.9670937);
