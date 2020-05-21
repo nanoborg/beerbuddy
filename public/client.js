@@ -155,7 +155,56 @@ function getMap() {
                 });
             });
         })
-        // searchDiv.appendChild(select);
+        
+    });
+
+    //beertype
+    axios.get("/beerTypes").then((res) => {
+        console.log(res.data);
+        let beerTypes = res.data;
+        // console.log(res.data);
+        let selectBeerType = document.createElement("select");
+        beerTypes.forEach(beerType => {
+        let option = document.createElement("option");
+        option.textContent = beerType.beertype;
+        option.setAttribute("value", beerType.id);
+        selectBeerType.appendChild(option);
+        let input = document.createElement("input");
+        input.setAttribute("value",beerType.beertype);
+        searchDiv.appendChild(selectBeerType);
+    })
+
+    selectBeerType.addEventListener('change', (e)=> {
+            var path = `/pubs/beertype/${e.target.value}`;
+            console.log(path);
+            axios.get(path).then((res) => {
+                console.log(res.data)
+        
+                let pubs = res.data;
+                map.entities.clear();
+                pubs.forEach((pub) => {
+                    // console.log(pub);
+                    var location = { latitude: pub.lat, longitude: pub.long };
+                    console.log("Second" + pub.is_pub_ratedb);
+                    //Create custom Pushpin
+                    pin = new Microsoft.Maps.Pushpin(location, {
+                        title: pub.pubname,
+                        icon: pub.is_pub_ratedb ? "beer.png" : "pub-icon.png",
+                        anchor: new Microsoft.Maps.Point(12, 36),
+                    });
+        
+                    pin.metadata = {
+                        id: pub.id,
+                    };
+        
+                    Microsoft.Maps.Events.addHandler(pin, "click", handlePinClick);
+        
+                    //Add the pushpin to the map
+                    map.entities.push(pin);
+                });
+            });
+        })
+        
     });
 
 
@@ -215,3 +264,6 @@ document.addEventListener('DOMContentLoaded',(e)=>{
     // alert("abcd");
     
 } )
+
+
+// searchDiv.appendChild(select);
