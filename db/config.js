@@ -3,7 +3,7 @@ const pg = require("pg");
 let pool;
 
 if (process.env.PRODUCTION) {
-    pool = new Pool({
+    pool = new pg.Pool({
         connectionString: process.env.DATABASE_URL,
     })
 } else if (process.env.UBUNTU_DB_PASSWORD) {
@@ -13,7 +13,7 @@ if (process.env.PRODUCTION) {
         multipleStatements: true,
     })
 } else {
-    pool = new Pool({
+    pool = new pg.Pool({
         database: 'my_local_database_name',
     })
 }
