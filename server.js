@@ -8,7 +8,7 @@ var bodyParser = require("body-parser");
 app.use(bodyParser());
 // app.use(bodyParser.urlencoded());
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 app.set("view engine", "ejs");
 

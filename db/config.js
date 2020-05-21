@@ -3,17 +3,22 @@ const pg = require("pg");
 let pool;
 
 if (process.env.PRODUCTION) {
-        pool = new Pool({
-        connectionString: process.env.DATABASE_URL,
-        })
-    } else {
     pool = new Pool({
-      database: 'beerbuddy'
+        connectionString: process.env.DATABASE_URL,
     })
-    }
+} else if (process.env.UBUNTU_DB_PASSWORD) {
+    pool = new pg.Pool({
+        database: "beerbuddy",
+        password: process.env.UBUNTU_DB_PASSWORD,
+        multipleStatements: true,
+    })
+} else {
+    pool = new Pool({
+        database: 'my_local_database_name',
+    })
+}
 
 // original code before heroku test!!!
-
 // if (process.env.UBUNTU_DB_PASSWORD) {
 //     pool = new pg.Pool({
 //         database: "beerbuddy",
