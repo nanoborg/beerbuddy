@@ -8,7 +8,7 @@ var bodyParser = require("body-parser");
 app.use(bodyParser());
 // app.use(bodyParser.urlencoded());
 
-const port = 8080;
+const port = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
 
@@ -145,5 +145,5 @@ app.post("/pubs/new", (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`listening on port ${port}`);
+    console.log(`server listening on port ${port}`);
 });
