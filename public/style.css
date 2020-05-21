@@ -20,9 +20,19 @@ input[type="text"] {
     font-size: 1.5rem;
 }
 
-.pubForm {
+.pubForm,
+.beerRatingForm {
     text-align: center;
 }
+
+.borderForm {
+    margin: 10% auto;
+    border-radius: 25px;
+    background: #f1f1f1;
+    padding: 20px;
+    width: 60%;
+}
+
 .button {
     background-color: #4caf50;
     border: none;
@@ -34,6 +44,17 @@ input[type="text"] {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+}
+
+.form-submit-button {
+    background: #0066a2;
+    color: white;
+    border-style: outset;
+    border-color: #0066a2;
+    height: 50px;
+    width: 50%;
+    font: bold 15px arial, sans-serif;
+    text-shadow: none;
 }
 
 .header {
@@ -141,7 +162,10 @@ input[type="text"] {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }
-
+h1,
 h3 {
     text-align: center;
+}
+h3 {
+    font-size: 2rem;
 }

@@ -16,37 +16,59 @@
             </div>
         </div>
 
-        <h2>Please enter pub information</h2>
-        <% let street = ""; let postCode = ""; let suburb = "";
-        if(address.address!='undefined') { street = address.address; } else {
-        street = "" } if(address.postCode!='undefined') { postCode =
-        address.postCode; } else { postCode = "" }
-        if(address.suburb!="undefined") { suburb = address.suburb; } else {
-        suburb = "" } console.log(address); %> ​
-        <div class="pubForm">
-            <form action="" method="post">
-                <input type="hidden" name="lat" value="<%= address.lat %>" />
-                <input type="hidden" name="long" value="<%= address.long%>" />
+        <div class="borderForm">
+            <h1>Please enter pub information</h1>
+            <% let street = ""; let postCode = ""; let suburb = "";
+            if(address.address!='undefined') { street = address.address; } else
+            { street = "" } if(address.postCode!='undefined') { postCode =
+            address.postCode; } else { postCode = "" }
+            if(address.suburb!="undefined") { suburb = address.suburb; } else {
+            suburb = "" } console.log(address); %> ​
+            <div class="pubForm">
+                <form action="" method="post">
+                    <input
+                        type="hidden"
+                        name="lat"
+                        value="<%= address.lat %>"
+                    />
+                    <input
+                        type="hidden"
+                        name="long"
+                        value="<%= address.long%>"
+                    />
 
-                <label for="pubName">Pub name:</label>
-                <input type="text" name="pubName" />
-                <br />
+                    <label for="pubName">Pub name:</label>
+                    <input type="text" name="pubName" />
+                    <br />
 
-                <label for="streetAddress">Street Address:</label>
-                <input type="text" name="streetAddress" value="<%= street%>" />
-                <br />
+                    <label for="streetAddress">Street Address:</label>
+                    <input
+                        type="text"
+                        name="streetAddress"
+                        value="<%= street%>"
+                    />
+                    <br />
 
-                <label for="postCode">Post Code:</label>
-                <input type="text" name="postCode" value="<%= postCode %>" />
-                <br />
+                    <label for="postCode">Post Code:</label>
+                    <input
+                        type="text"
+                        name="postCode"
+                        value="<%= postCode %>"
+                    />
+                    <br />
 
-                <label for="suburb">Suburb:</label>
-                <input type="text" name="suburb" value="<%= suburb %>" />
+                    <label for="suburb">Suburb:</label>
+                    <input type="text" name="suburb" value="<%= suburb %>" />
 
-                <br />
-                <button>Submit Pub and Add Beer Rating</button>
-                <button>Return</button>
-            </form>
+                    <br />
+                    <div class="div-form-submit-buttons">
+                        <button>
+                            Submit Pub and Add Beer Rating
+                        </button>
+                        <button>Return</button>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <div class="footer">
