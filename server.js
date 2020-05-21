@@ -131,7 +131,7 @@ app.post("/pubs/new", (req, res) => {
     let pubID = null;
 
     db.query(
-        `INSERT INTO pub (pubname,address,postcode,Suburb, LAT,Long) VALUES ('${pubName}','${street}', ${postCode},'${suburb}', ${lat}, ${long});`,
+        `INSERT INTO pub (pubname,address,postcode,Suburb,is_pub_ratedB, LAT,Long) VALUES ('${pubName}','${street}', ${postCode},'${suburb}',${false}, ${lat}, ${long});`,
         (err, dbRes) => {
             db.query(
                 `SELECT * from pub where pubName = '${pubName}'`,

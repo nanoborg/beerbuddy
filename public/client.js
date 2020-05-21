@@ -88,11 +88,11 @@ function getMap() {
         pubs.forEach((pub) => {
             // console.log(pub);
             var location = { latitude: pub.lat, longitude: pub.long };
-
+            console.log("First"+ pub.pubname + pub.is_pub_ratedb);
             //Create custom Pushpin
             pin = new Microsoft.Maps.Pushpin(location, {
                 title: pub.pubname,
-                icon: pub.is_pub_ratedb ? "beer.png" : "pub-icon.png",
+                icon: pub.is_pub_ratedb === true ? "beer.png" : "pub-icon.png",
                 anchor: new Microsoft.Maps.Point(12, 36),
             });
 
@@ -136,7 +136,7 @@ function getMap() {
                 pubs.forEach((pub) => {
                     // console.log(pub);
                     var location = { latitude: pub.lat, longitude: pub.long };
-        
+                    console.log("Second" + pub.is_pub_ratedb);
                     //Create custom Pushpin
                     pin = new Microsoft.Maps.Pushpin(location, {
                         title: pub.pubname,
