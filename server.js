@@ -3,7 +3,7 @@ console.log("server");
 const express = require("express");
 const app = express();
 const db = require("./db/config.js");
-
+const escape = require("pg-escape");
 var bodyParser = require("body-parser");
 app.use(bodyParser());
 // app.use(bodyParser.urlencoded());
@@ -104,7 +104,7 @@ app.get("/beers/:id", (req, res) => {
         `select avg(rating), beertype.beertype, beerbrand.beerbrand from rating, pub,beertype,beerbrand where rating.pub_id = pub.id and pub.id=${id} and beertype.id = rating.beertype and beerbrand.id = rating.beerbrand_id group by beertype.beertype,beerbrand.beerbrand;`,
         (err, dbres) => {
             all_records = dbres.rows;
-            console.log(`SELECT * from pub where id = ${id}`);
+            // console.log(`SELECT * from pub where id = ${id}`);
             db.query(`SELECT * from pub where id = ${id}`, (err, dbres) => {
                 pubInfo = dbres.rows;
                 console.log(`What do we see for pubinfo ${pubInfo}`);
@@ -154,12 +154,13 @@ app.post("/pubs/new", (req, res) => {
     let long = Number(req.body.long);
 
     let pubID = null;
-
+    let sql = escape(`INSERT INTO pub (pubname,address,postcode,Suburb,is_pub_ratedB, LAT,Long) VALUES (%L,'${street}', ${postCode},'${suburb}',${false}, ${lat}, ${long});`,`${pubName}`);
+    console.log(sql);
     db.query(
-        `INSERT INTO pub (pubname,address,postcode,Suburb,is_pub_ratedB, LAT,Long) VALUES ('${pubName}','${street}', ${postCode},'${suburb}',${false}, ${lat}, ${long});`,
+        sql,
         (err, dbRes) => {
             db.query(
-                `SELECT * from pub where pubname = '${pubName}'`,
+                escape(`SELECT * from pub where pubname = (%L);`,`${pubName}`),
                 (err, dbres) => {
                     pubID = dbres.rows[0].id;
                     res.redirect(`/beers/new/${pubID}`);
