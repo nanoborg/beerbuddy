@@ -4,10 +4,10 @@ let map = null;
 let searchManager = null;
 let searchDiv = document.querySelector("#search-filters");
 
-const btnAddLocation = document.querySelector('.add-by-location')
-const btnAddAddress = document.querySelector('.add-by-address')
-const dialogInputBox = document.querySelector('.input-dialog-box')
-const inputBox = document.querySelector('searchBox')
+const btnAddLocation = document.querySelector(".add-by-location");
+const btnAddAddress = document.querySelector(".add-by-address");
+const dialogInputBox = document.querySelector(".input-dialog-box");
+const inputBox = document.querySelector("searchBox");
 const handlePinClick = (e) => {
     // console.log(e.target)
     let path = `/beers/${e.target.metadata.id}`;
@@ -31,25 +31,27 @@ function reverseGeocode(loc) {
             location: loc,
             callback: function (curLoc) {
                 //Tell the user the name of the result.
-                console.log(curLoc.address.addressLine)
+                console.log(curLoc.address.addressLine);
 
-                if (curLoc.address.addressLine === undefined ||
+                if (
+                    curLoc.address.addressLine === undefined ||
                     curLoc.address.postalCode === undefined ||
                     curLoc.address.locality === undefined
                 ) {
-                    document.querySelector("h3").textContent = "Unable to use current location, please enter in address."
+                    document.querySelector("h3").textContent =
+                        "Unable to use current location, please enter in address.";
                     handleAddAddress();
                 } else {
-
-                    let path = `/pubs/new?address=${curLoc.address.addressLine}&lat=${loc.latitude}&long=${loc.longitude}&postCode=${curLoc.address.postalCode}&suburb=${curLoc.address.locality}`
+                    let path = `/pubs/new?address=${curLoc.address.addressLine}&lat=${loc.latitude}&long=${loc.longitude}&postCode=${curLoc.address.postalCode}&suburb=${curLoc.address.locality}`;
                     location = path;
                 }
             },
             errorCallback: function (e) {
                 //If there is an error, alert the user about it.
-                document.querySelector("h3").textContent = "Unable to use current location, please enter in address."
+                document.querySelector("h3").textContent =
+                    "Unable to use current location, please enter in address.";
                 handleAddAddress();
-            }
+            },
         };
 
         //Make the reverse geocode request.
@@ -60,20 +62,25 @@ function reverseGeocode(loc) {
 function getMap() {
     map = new Microsoft.Maps.Map("#map", {
         center: new Microsoft.Maps.Location(-37.8136, 144.9631),
-        zoom: 9,
+        zoom: 12,
     });
 
-    Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
+    Microsoft.Maps.loadModule("Microsoft.Maps.AutoSuggest", {
         callback: function () {
             var manager = new Microsoft.Maps.AutosuggestManager({
-                placeSuggestions: false
+                placeSuggestions: false,
             });
-            manager.attachAutosuggest('.searchBox', '.searchBoxContainer', selectedSuggestion);
+            manager.attachAutosuggest(
+                ".searchBox",
+                ".searchBoxContainer",
+                selectedSuggestion
+            );
         },
         errorCallback: function (msg) {
             alert(msg);
         },
-        credentials: 'Ap77Q31MJhCP2ZZX2OklF0nVKFIP2AhgxeChi6y2pEvjGmJhN5xM-h1J39gwaSAX'
+        credentials:
+            "Ap77Q31MJhCP2ZZX2OklF0nVKFIP2AhgxeChi6y2pEvjGmJhN5xM-h1J39gwaSAX",
     });
 
     var center = map.getCenter();
@@ -88,7 +95,7 @@ function getMap() {
         pubs.forEach((pub) => {
             // console.log(pub);
             var location = { latitude: pub.lat, longitude: pub.long };
-            console.log("First"+ pub.pubname + pub.is_pub_ratedb);
+            console.log("First" + pub.pubname + pub.is_pub_ratedb);
             //Create custom Pushpin
             pin = new Microsoft.Maps.Pushpin(location, {
                 title: pub.pubname,
@@ -108,14 +115,13 @@ function getMap() {
     });
 
     //dropdown
-    
+
     axios.get("/beerBrands").then((res) => {
-        
         let beerBrands = res.data;
         console.log(res.data);
         let select = document.createElement("select");
-        
-        beerBrands.forEach(beerBrand => {
+
+        beerBrands.forEach((beerBrand) => {
             let option = document.createElement("option");
             option.textContent = beerBrand.beerbrand;
             option.setAttribute("value", beerBrand.id);
@@ -123,14 +129,14 @@ function getMap() {
             // let input = document.createElement("input");
             // input.setAttribute("value",beerBrand.beerbrand);
             searchDiv.appendChild(select);
-        })
+        });
 
-        select.addEventListener('change', (e)=> {
+        select.addEventListener("change", (e) => {
             var path = `/pubs/beerbrand/${e.target.value}`;
             console.log(path);
             axios.get(path).then((res) => {
-                console.log(res.data)
-        
+                console.log(res.data);
+
                 let pubs = res.data;
                 map.entities.clear();
                 pubs.forEach((pub) => {
@@ -143,19 +149,22 @@ function getMap() {
                         icon: pub.is_pub_ratedb ? "beer.png" : "pub-icon.png",
                         anchor: new Microsoft.Maps.Point(12, 36),
                     });
-        
+
                     pin.metadata = {
                         id: pub.id,
                     };
-        
-                    Microsoft.Maps.Events.addHandler(pin, "click", handlePinClick);
-        
+
+                    Microsoft.Maps.Events.addHandler(
+                        pin,
+                        "click",
+                        handlePinClick
+                    );
+
                     //Add the pushpin to the map
                     map.entities.push(pin);
                 });
             });
-        })
-        
+        });
     });
 
     //beertype
@@ -164,22 +173,22 @@ function getMap() {
         let beerTypes = res.data;
         // console.log(res.data);
         let selectBeerType = document.createElement("select");
-        beerTypes.forEach(beerType => {
-        let option = document.createElement("option");
-        option.textContent = beerType.beertype;
-        option.setAttribute("value", beerType.id);
-        selectBeerType.appendChild(option);
-        let input = document.createElement("input");
-        input.setAttribute("value",beerType.beertype);
-        searchDiv.appendChild(selectBeerType);
-    })
+        beerTypes.forEach((beerType) => {
+            let option = document.createElement("option");
+            option.textContent = beerType.beertype;
+            option.setAttribute("value", beerType.id);
+            selectBeerType.appendChild(option);
+            let input = document.createElement("input");
+            input.setAttribute("value", beerType.beertype);
+            searchDiv.appendChild(selectBeerType);
+        });
 
-    selectBeerType.addEventListener('change', (e)=> {
+        selectBeerType.addEventListener("change", (e) => {
             var path = `/pubs/beertype/${e.target.value}`;
             console.log(path);
             axios.get(path).then((res) => {
-                console.log(res.data)
-        
+                console.log(res.data);
+
                 let pubs = res.data;
                 map.entities.clear();
                 pubs.forEach((pub) => {
@@ -192,22 +201,23 @@ function getMap() {
                         icon: pub.is_pub_ratedb ? "beer.png" : "pub-icon.png",
                         anchor: new Microsoft.Maps.Point(12, 36),
                     });
-        
+
                     pin.metadata = {
                         id: pub.id,
                     };
-        
-                    Microsoft.Maps.Events.addHandler(pin, "click", handlePinClick);
-        
+
+                    Microsoft.Maps.Events.addHandler(
+                        pin,
+                        "click",
+                        handlePinClick
+                    );
+
                     //Add the pushpin to the map
                     map.entities.push(pin);
                 });
             });
-        })
-        
+        });
     });
-
-
 }
 
 const handleAddLocation = (e) => {
@@ -233,37 +243,29 @@ const handleAddLocation = (e) => {
 function selectedSuggestion(curLoc) {
     console.log(curLoc);
     //Tell the user the name of the result.
-    console.log(curLoc.address.addressLine)
+    console.log(curLoc.address.addressLine);
     // return r.name
     // alert(r.name);
-    let path = `/pubs/new?address=${curLoc.address.addressLine}&lat=${curLoc.location.latitude}&long=${curLoc.location.longitude}&postCode=${curLoc.address.postalCode}&suburb=${curLoc.address.locality}`
+    let path = `/pubs/new?address=${curLoc.address.addressLine}&lat=${curLoc.location.latitude}&long=${curLoc.location.longitude}&postCode=${curLoc.address.postalCode}&suburb=${curLoc.address.locality}`;
     // console.log(path)
     location = path;
-
-
 }
 const handleAddAddress = (e) => {
-    console.log('button address')
+    console.log("button address");
     dialogInputBox.autofocus = true;
-    dialogInputBox.classList.toggle('visible');
-    btnAddAddress.classList.toggle('visible');
-    btnAddLocation.classList.toggle('visible');
-
-
-
-}
+    dialogInputBox.classList.toggle("visible");
+    btnAddAddress.classList.toggle("visible");
+    btnAddLocation.classList.toggle("visible");
+};
 
 btnAddLocation.addEventListener("click", handleAddLocation);
 btnAddAddress.addEventListener("click", handleAddAddress);
 
 // #map.addEventListener("load", myScript);
 
-
 // let searchDiv = document.querySelector("#search-filters");
-document.addEventListener('DOMContentLoaded',(e)=>{
+document.addEventListener("DOMContentLoaded", (e) => {
     // alert("abcd");
-    
-} )
-
+});
 
 // searchDiv.appendChild(select);
