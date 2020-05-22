@@ -32,7 +32,7 @@ CREATE TABLE beertype (
 
 CREATE TABLE rating (
     id SERIAL PRIMARY KEY,
-    rating TEXT,
+    rating INTEGER,
     pub_id INTEGER,
     beerbrand_id INTEGER,
     beertype INTEGER,
@@ -40,6 +40,14 @@ CREATE TABLE rating (
     FOREIGN KEY (beerbrand_id) REFERENCES beerbrand (id),
     FOREIGN KEY (beertype) REFERENCES beertype (id)
 );
+-- onchange dropdown event
+select * from pub,rating,beerbrand where beerbrand = 'James Squire Nine Tales Amber Ake' and pub.id = rating.id and rating.beerbrand_id= beerbrand.id;
+
+-- estblish pubs
+INSERT INTO pub (pubname,address,postcode,Suburb,date_last_review, LAT,Long) VALUES ('Players On Lygon','192-202 Lygon Street',3053,'Carlton','2020-05-19',-37.8024641,144.9670937);
+INSERT INTO pub (pubname,address,postcode,Suburb,date_last_review, LAT,Long) VALUES ('Bar Centrale','160-162 Lygon Street',3053,'Carlton','2020-05-19',-37.80344128,144.9667701);
+INSERT INTO pub (pubname,address,postcode,Suburb,date_last_review, LAT,Long) VALUES ('Percys Bar & Bistro','414-422 Lygon Street',3053,'Carlton','2020-05-19',-37.79694543,144.9678124);
+INSERT INTO pub (pubname,address,postcode,Suburb,date_last_review, LAT,Long) VALUES ('Royce On St Kilda Road','375-385 St Kilda Road',3004,'Melbourne','2020-05-19',-37.83508258,144.9754922);
 
 -- establish beer types
 INSERT INTO beertype (beertype) VALUES ('Amber Ale');
@@ -80,3 +88,20 @@ INSERT INTO beerbrand (beerbrand) VALUES ('Guiness');
 INSERT INTO beerbrand (beerbrand) VALUES ('Heineken');
 INSERT INTO beerbrand (beerbrand) VALUES ('Carlsberg');
 
+-- ratings
+INSERT INTO rating (rating,pub_id,beerbrand_id,beertype) VALUES (5,1,1,1);
+INSERT INTO rating (rating,pub_id,beerbrand_id,beertype) VALUES (4,2,1,2);
+INSERT INTO rating (rating,pub_id,beerbrand_id,beertype) VALUES (3,1,1,1);
+INSERT INTO rating (rating,pub_id,beerbrand_id,beertype) VALUES (4,2,1,1);
+INSERT INTO rating (rating,pub_id,beerbrand_id,beertype) VALUES (2,2,1,2);
+INSERT INTO rating (rating,pub_id,beerbrand_id,beertype) VALUES (3,2,1,2);
+
+-- updates to ratings to test SQL logic for inserting rating and pub update
+INSERT INTO rating (rating, pub_id, beerbrand_id, beertype) VALUES (5,1,1,2);
+INSERT INTO rating (rating, pub_id, beerbrand_id, beertype) VALUES (4,1,1,3);
+INSERT INTO rating (rating, pub_id, beerbrand_id, beertype) VALUES (3,1,1,4);
+INSERT INTO rating (rating, pub_id, beerbrand_id, beertype) VALUES (2,1,1,5);
+INSERT INTO rating (rating, pub_id, beerbrand_id, beertype) VALUES (1,1,1,6);
+INSERT INTO rating (rating, pub_id, beerbrand_id, beertype) VALUES (5,1,1,6);
+
+UPDATE pub SET is_pub_ratedB='T', date_last_review='2020-05-20' WHERE pub.id = 1;

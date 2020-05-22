@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="/style.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Galada&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Oleo+Script&display=swap" rel="stylesheet">
+        <script
+            type="text/javascript"
+            src="https://www.bing.com/api/maps/mapcontrol?callback=getMap&key=AjSzMJV7gcszWBJEr05Z99O6O1Qc61m7E09vz2cyN6zjJYNGJ_RE36WjYCrYb3LD"
+            async
+            defer
+        ></script>
+    </head>
+
+    <body>
+        <div class="header">
+            <a href="/" class="logo">BeerBuddy</a>
+            <div class="header-right">
+
+                <a class="active" href="/">Home</a>
+                <a href="/contact">Contact</a>
+                <a href="/about">About</a>
+
+            </div>
+        </div>
+
+        <div class="search-filter-container">
+            <h3 class="filter-title">Filter Locations By</h3>
+            <div id="search-filters"></div>
+        </div>
+        <br/>
+        <div id="map"></div>
+
+        <div class="add-pub-options-container">
+            <h3>Add your Pub either by</h3>
+            <div class="add-pub-options-buttons">
+                <button class="add-by-location button-addPub visible">
+                    <h2> Current Location </h2>
+                </button>
+                <button class="add-by-address button-addPub visible">
+                    <h2>  Enter Address </h2>
+                </button>
+            </div>
+        </div>
+
+        <div class="input-dialog-box">
+            <div class="searchBoxContainer">
+                <input
+                    type="text"
+                    class="searchBox"
+                    placeholder="enter street address"
+                    focus
+                />
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2020 By: Shailesh, Peter, Tim & Glen</p>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+        <script src="client.js"></script>
+    </body>
+</html>

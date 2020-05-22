@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/style.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Galada&display=swap" rel="stylesheet">
+        <title>Show all beer</title>
+    </head>
+    <body>
+        <div class="header">
+            <a href="/" class="logo">BeerBuddy</a>
+            <div class="header-right">
+                <a class="active" href="/">Home</a>
+                <a href="/contact">Contact</a>
+                <a href="/about">About</a>
+            </div>
+        </div>
+
+        <div class="borderForm">
+            <h1><%= pubInfo[0].pubname %></h1>
+            <p>
+                <%= pubInfo[0].address %>
+                <br/>
+                <%= pubInfo[0].suburb %>
+                <br/><%= pubInfo[0].postcode %>
+
+            </p>
+
+            <p>
+                <% for (var i = 0; i < beerTypes.length; i++) { %>
+                    <%=beerTypes[i].beertype%> || <%=beerTypes[i].beerbrand%>
+                    
+                    <p><% var star = Math.round(Number(beerTypes[i].avg).toFixed(2))%>
+                        <% for (var j=0; j < star; j ++) { %>
+                            <span style='font-size:35px;'>&#9733;</span>
+                        <% } %>
+                    </p>
+                <% } %>
+            
+            </p>  
+            <div class="div-form-submit-buttons">
+                <button
+                    type="button"
+                    onClick="javascript:location.href = '/';">Return
+                </button>
+                <button
+                    type="button"
+                    onClick="javascript:location.href = '/beers/new/<%= pubInfo[0].id %>';">Rate Beers
+                </button>
+                
+            </div>
+           
+        </div>  
+        <div class="footer">
+            <p>&copy; 2020 By: Shailesh, Peter, Tim & Glen</p>
+        </div>
+    </body>
+</html>

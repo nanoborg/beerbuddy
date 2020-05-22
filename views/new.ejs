@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/style.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Galada&display=swap" rel="stylesheet">
+        <title>New Beer Rating</title>
+    </head>
+    <body>
+        <div class="header">
+            <a href="/" class="logo">BeerBuddy</a>
+            <div class="header-right">
+                <a class="active" href="/">Home</a>
+                <a href="/contact">Contact</a>
+                <a href="/about">About</a>
+            </div>
+        </div>
+        <div class="borderForm">
+            <h1>Please enter your Beer rating:</h1>
+            <div class="pubForm">
+                <form action="/rating/<%=pubInfo[0].id %>" method="post">
+                    <!-- <input type="hidden" name="_method" value="patch" /> -->
+                    <input
+                        type="hidden"
+                        name="id"
+                        value="<%=pubInfo[0].id %>"
+                    />
+                    <div class="div-form-submit-buttons">
+                    <label>Pub name:</label>
+                    <label for=""><%=pubInfo[0].pubname%></label>
+                    
+
+                    <!-- <label for="">Beer Type:</label>
+                    <select name="beerType" required>
+                        <% beertypes.forEach(beertype => { %>
+                        <option value="<%= beertype.id%>"
+                            ><%=beertype.beertype%>
+                        </option>
+                        <% }); %>
+                    </select>
+                     -->
+
+                    <label for="">Beer Type:</label>
+                    <select name="beerType" required>
+                        <% beertypes.forEach(beertype => { %>
+                        <option value="<%= beertype.id%>"
+                            ><%=beertype.beertype%>
+                        </option>
+                        <% }); %>
+                    </select>
+                    
+
+                    <label for="">Beer Brand:</label>
+                    <select name="beerBrand" id="beerBrand" required>
+                        <% beerbrands.forEach(beerbrand => { %>
+                        <option value="<%= beerbrand.id%>"
+                            ><%=beerbrand.beerbrand%>
+                        </option>
+                        <% }); %>
+                    </select>
+                    
+                    <label for="">Beer Rating:</label>
+                    <select name="rating" id="" required>
+                        <option value="5">5-Star</option>
+                        <option value="4">4-Star</option>
+                        <option value="3">3-Star</option>
+                        <option value="2">2-Star</option>
+                        <option value="1">1-Star</option>
+                    </select>
+                    
+                </div>
+                    <div class="div-form-submit-buttons">
+                        <button
+                            type="button"
+                            onClick="javascript:location.href = '/';"
+                        >
+                            Return
+                        </button>
+                        <button>Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+            <div class="footer">
+                <p>&copy; 2020 By: Shailesh, Peter, Tim & Glen</p>
+            </div>
+        </div>
+    </body>
+</html>
