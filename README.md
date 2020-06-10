@@ -24,7 +24,7 @@ This project is to demonstrate both client side and Server side technologies wit
 ## BeerBuddy Link
 
 -   The link to the BeerBuddy online application is here:
-    [https://fast-plains-49674.herokuapp.com/]
+    [https://vast-bastion-54118.herokuapp.com/]
 -   Public access to ER Diagram / Schema, Kanban, User Stories and Wireframe link:
     [https://whimsical.com/Ag1F3iFkPqXJFAgE5BS4hr]
 
@@ -111,4 +111,4 @@ Version Control: Git
 
 Download via:
 
--   https://github.com/mistergjones/beerbuddy.git
+-   https://github.com/nanoborg/beerbuddy.git
